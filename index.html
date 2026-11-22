@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Edgar Bizarro · Desenvolvedor full stack</title>
+  <meta name="description" content="Desenvolvedor full stack com foco em Laravel, React, Rust e dados. APIs, aplicações web e automação de processos.">
+  <meta name="theme-color" content="#101214">
+  <link rel="canonical" href="https://edgarbizarro.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Edgar Bizarro · Desenvolvedor full stack">
+  <meta property="og:description" content="APIs, aplicações web e dados. Laravel, React, Rust e Python.">
+  <meta property="og:url" content="https://edgarbizarro.github.io/">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23101214'/%3E%3Ctext x='16' y='23' font-family='monospace' font-size='20' font-weight='700' text-anchor='middle' fill='%23ff6a2b'%3EEB%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Edgar Bizarro","jobTitle":"Desenvolvedor full stack","url":"https://edgarbizarro.github.io/","sameAs":["https://github.com/edgarbizarro","https://www.linkedin.com/in/edgar-bizarro-832902104/"]}
+  </script>
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a class="skip" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="top">
+    <a class="brand" href="#inicio" aria-label="Edgar Bizarro, início">EB</a>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="#caminho">Projetos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <!-- HERO: nome + terminal interativo -->
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <h1>
+          <span class="line"><span>Edgar</span></span>
+          <span class="line"><span>Bizarro</span></span>
+        </h1>
+        <p class="lead">Desenvolvedor full stack. Construo APIs, aplicações web e soluções de dados, do back-end em Laravel e Rust ao front-end em React.</p>
+        <p class="hint">Role para acompanhar uma requisição por dentro de uma aplicação, ou converse com o terminal.</p>
+      </div>
+
+      <div class="term" id="term" role="group" aria-label="Terminal interativo">
+        <div class="term-bar">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="term-title">visitante@edgarbizarro:~</span>
+        </div>
+        <div class="term-body" id="out" aria-live="polite">
+          <div class="ln cmdline"><span class="ps">$</span> <span class="cmd">curl -s edgarbizarro.dev/api/me</span></div>
+          <div class="ln j"><span class="b">{</span></div>
+          <div class="ln j in1"><span class="k">"nome"</span>: <span class="s">"Edgar Bizarro"</span>,</div>
+          <div class="ln j in1"><span class="k">"funcao"</span>: <span class="s">"Desenvolvedor full stack"</span>,</div>
+          <div class="ln j in1"><span class="k">"local"</span>: <span class="s">"Brasil"</span>,</div>
+          <div class="ln j in1"><span class="k">"stack"</span>: [<span class="s">"PHP"</span>, <span class="s">"Laravel"</span>, <span class="s">"React"</span>, <span class="s">"TypeScript"</span>, <span class="s">"Rust"</span>, <span class="s">"Python"</span>],</div>
+          <div class="ln j in1"><span class="k">"contato"</span>: <span class="s">"edgar.h.bizarro@gmail.com"</span></div>
+          <div class="ln j"><span class="b">}</span></div>
+          <div class="ln muted">Digite <b>help</b> ou use os atalhos abaixo.</div>
+        </div>
+        <form class="prompt" id="prompt" autocomplete="off">
+          <label for="cmd" class="ps">$</label>
+          <input id="cmd" name="cmd" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Digite um comando" placeholder="digite um comando">
+        </form>
+        <div class="chips" id="chips">
+          <button type="button" data-cmd="help">help</button>
+          <button type="button" data-cmd="projetos">projetos</button>
+          <button type="button" data-cmd="stack">stack</button>
+          <button type="button" data-cmd="contato">contato</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAMINHO DA REQUISIÇÃO -->
+    <section class="flow" id="caminho" aria-labelledby="h-caminho">
+      <div class="stage">
+        <div class="flow-head">
+          <p class="route">POST /api/transferencias</p>
+          <h2 id="h-caminho">O caminho de uma requisição</h2>
+          <p class="flow-sub">Cada projeto vive em uma camada. Role e acompanhe.</p>
+        </div>
+
+        <div class="flow-body">
+          <div class="track" aria-label="Etapas da requisição">
+            <div class="rail"><div class="fill"></div><div class="packet" aria-hidden="true"></div></div>
+            <button class="node" type="button" data-i="0"><i></i><span>Interface</span></button>
+            <button class="node" type="button" data-i="1"><i></i><span>Rota e auth</span></button>
+            <button class="node" type="button" data-i="2"><i></i><span>Regras</span></button>
+            <button class="node" type="button" data-i="3"><i></i><span>Banco</span></button>
+            <button class="node" type="button" data-i="4"><i></i><span>Resposta</span></button>
+          </div>
+
+          <div class="panels">
+            <article class="panel" data-i="0">
+              <p class="stage-no">1 de 5 · Cliente</p>
+              <h3>Interface</h3>
+              <p>A requisição nasce numa tela. Componentes em React e TypeScript conversam com o back-end por Inertia, com estado, validação e gráficos que precisam ser claros para quem usa.</p>
+              <a class="proj" href="https://github.com/edgarbizarro/fin_control" target="_blank" rel="noopener">
+                <span class="pn">fin_control <b aria-hidden="true">↗</b></span>
+                <span class="pd">Gestão financeira pessoal: dashboard de receitas e despesas, orçamentos mensais por categoria e relatórios.</span>
+                <span class="pt">Laravel 12 · React 19 · TypeScript · Inertia · Tailwind</span>
+              </a>
+            </article>
+
+            <article class="panel" data-i="1">
+              <p class="stage-no">2 de 5 · Servidor</p>
+              <h3>Rota e autenticação</h3>
+              <p>Antes de qualquer regra, a API confirma quem está chamando. Login, token JWT, senhas com hash e rotas protegidas, em uma arquitetura hexagonal que separa o framework do domínio.</p>
+              <a class="proj" href="https://github.com/edgarbizarro/rust_api" target="_blank" rel="noopener">
+                <span class="pn">rust_api <b aria-hidden="true">↗</b></span>
+                <span class="pd">API REST de usuários com autenticação JWT, migrações e Docker, escrita em Rust.</span>
+                <span class="pt">Rust · Axum · SQLx · SQLite · Docker</span>
+              </a>
+            </article>
+
+            <article class="panel" data-i="2">
+              <p class="stage-no">3 de 5 · Domínio</p>
+              <h3>Regras de negócio</h3>
+              <p>É aqui que o sistema decide o que é permitido: uma campanha ativa por cluster, SKU único, desconto nunca negativo. Regras explícitas, em camadas separadas, para que mudar uma não quebre as outras.</p>
+              <a class="proj" href="https://github.com/edgarbizarro/spagc" target="_blank" rel="noopener">
+                <span class="pn">spagc <b aria-hidden="true">↗</b></span>
+                <span class="pd">API de promoções regionais: estados, cidades, clusters, campanhas, descontos e produtos.</span>
+                <span class="pt">Laravel 10 · MySQL · Docker (Sail) · OpenAPI</span>
+              </a>
+            </article>
+
+            <article class="panel" data-i="3">
+              <p class="stage-no">4 de 5 · Persistência</p>
+              <h3>Banco de dados</h3>
+              <p>Dinheiro não pode ficar pela metade. Transferências, depósitos e estornos acontecem como operações atômicas: ou tudo é gravado, ou nada é.</p>
+              <a class="proj" href="https://github.com/edgarbizarro/walletw" target="_blank" rel="noopener">
+                <span class="pn">walletw <b aria-hidden="true">↗</b></span>
+                <span class="pd">API de carteira digital com cadastro, autenticação, transferências entre usuários, estorno e histórico.</span>
+                <span class="pt">Laravel 12 · MySQL · Sanctum · Docker (Sail)</span>
+              </a>
+            </article>
+
+            <article class="panel" data-i="4">
+              <p class="stage-no">5 de 5 · Resposta</p>
+              <h3>Resposta e confiança</h3>
+              <p>A resposta volta com o status certo, documentada em OpenAPI e coberta por testes unitários e de ponta a ponta. Quem consome a API sabe o que esperar, e quem mantém sabe o que quebrou.</p>
+              <a class="proj" href="https://github.com/edgarbizarro?tab=repositories" target="_blank" rel="noopener">
+                <span class="pn">Todos os repositórios <b aria-hidden="true">↗</b></span>
+                <span class="pd">Código, testes e documentação no GitHub.</span>
+                <span class="pt">PHPUnit · Playwright · OpenAPI · Docker</span>
+              </a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stack" id="stack" aria-labelledby="h-stack">
+      <p class="route reveal">GET /stack</p>
+      <h2 id="h-stack" class="reveal">Tecnologias</h2>
+      <dl class="grid reveal">
+        <div><dt>Back-end</dt><dd>PHP, Laravel, Livewire, Rust, Python</dd></div>
+        <div><dt>Front-end</dt><dd>React, TypeScript, Inertia, Tailwind</dd></div>
+        <div><dt>Dados e BI</dt><dd>Power BI, Python, Apache Superset, Redash</dd></div>
+        <div><dt>Bancos e infra</dt><dd>MySQL, PostgreSQL, SQLite, Docker</dd></div>
+      </dl>
+      <p class="about reveal">Atuo em aplicações web, integração de APIs e automação de processos, incluindo o uso de IA em fluxos de negócio. Venho de uma base em análise de dados, o que influencia como modelo regras de negócio e relatórios.</p>
+    </section>
+
+    <section class="contact" id="contato" aria-labelledby="h-contato">
+      <p class="route reveal">POST /contato</p>
+      <h2 id="h-contato" class="reveal">Vamos conversar sobre o seu projeto.</h2>
+      <a class="mail reveal" href="mailto:edgar.h.bizarro@gmail.com">edgar.h.bizarro@gmail.com</a>
+      <ul class="links reveal">
+        <li><a href="https://www.linkedin.com/in/edgar-bizarro-832902104/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+        <li><a href="https://github.com/edgarbizarro" target="_blank" rel="noopener">GitHub ↗</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year">2026</span> Edgar Bizarro · Brasil</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
