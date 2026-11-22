@@ -18,17 +18,98 @@
     items.forEach((el) => io.observe(el));
   }
 
-  /* ---------- hero: pointer glow on the dot grid ---------- */
+  /* ---------- hero: ASCII field ---------- */
   const hero = $('.hero');
-  if (hero && !reduce && matchMedia('(pointer: fine)').matches) {
-    let raf = 0, mx = 0, my = 0;
-    hero.addEventListener('pointermove', (e) => {
-      const r = hero.getBoundingClientRect();
-      mx = e.clientX - r.left; my = e.clientY - r.top;
-      if (!raf) raf = requestAnimationFrame(() => {
-        hero.style.setProperty('--mx', mx + 'px'); hero.style.setProperty('--my', my + 'px'); raf = 0;
-      });
-    });
+  const cv = $('.ascii');
+  const ctx = cv && cv.getContext ? cv.getContext('2d') : null;
+  if (hero && ctx) {
+    const RAMP = ' .:-=+*#%';
+    const L = RAMP.length - 1;
+    const INK = '236,235,230', ACC = '255,106,43';
+    let w = 0, h = 0, cw = 16, ch = 22, cols = 0, rows = 0;
+    let tx = -999, ty = -999, px = -999, py = -999, active = false;
+    let visible = true, last = 0, raf = 0, t0 = performance.now();
+
+    const resize = () => {
+      w = hero.clientWidth; h = hero.clientHeight;
+      const dpr = Math.min(devicePixelRatio || 1, w < 700 ? 1.5 : 2);
+      cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cw = w < 700 ? 12 : 16; ch = Math.round(cw * 1.4);
+      cols = Math.ceil(w / cw); rows = Math.ceil(h / ch);
+      ctx.font = `500 ${Math.round(cw * 0.9)}px "JetBrains Mono", ui-monospace, monospace`;
+      ctx.textBaseline = 'top';
+      draw(performance.now());
+    };
+
+    const draw = (now) => {
+      const t = (now - t0) / 1000;
+      ctx.clearRect(0, 0, w, h);
+      const cx = cols * 0.62, cy = rows * 0.38;
+      const px_c = px / cw, py_c = py / ch;
+      const strength = w < 700 ? 0.8 : 1;
+      // buckets[level][accent] -> array of x,y pairs
+      const buckets = Array.from({ length: L + 1 }, () => [[], []]);
+      for (let j = 0; j < rows; j++) {
+        for (let i = 0; i < cols; i++) {
+          const dx = i - cx, dy = (j - cy) * 1.6;
+          let v = Math.sin(i * 0.11 + t * 0.6) + Math.sin(j * 0.15 - t * 0.45)
+                + Math.sin((i + j) * 0.07 + t * 0.3) + Math.sin(Math.hypot(dx, dy) * 0.12 - t * 0.8);
+          let n = (v + 4) / 8;
+          let bump = 0;
+          if (active) {
+            const ddx = i - px_c, ddy = (j - py_c) * 1.6;
+            bump = Math.exp(-(ddx * ddx + ddy * ddy) / 90);
+          }
+          // calmer on the left, where the headline sits
+          const calm = 0.5 + 0.5 * (i / cols);
+          let k = (Math.pow(n, 1.3) * 1.05 + bump * 0.7) * calm;
+          const lvl = Math.min(L, Math.floor(k * (L + 1)));
+          if (lvl < 1) continue;
+          const b = buckets[lvl][bump > 0.18 ? 1 : 0];
+          b.push(i * cw, j * ch);
+        }
+      }
+      for (let lvl = 1; lvl <= L; lvl++) {
+        const a = (0.08 + (lvl / L) * 0.3) * strength;
+        for (let c = 0; c < 2; c++) {
+          const b = buckets[lvl][c];
+          if (!b.length) continue;
+          ctx.fillStyle = `rgba(${c ? ACC : INK},${c ? Math.min(0.9, a * 2.6).toFixed(3) : a.toFixed(3)})`;
+          const ch0 = RAMP[lvl];
+          for (let q = 0; q < b.length; q += 2) ctx.fillText(ch0, b[q], b[q + 1]);
+        }
+      }
+    };
+
+    const loop = (now) => {
+      raf = 0;
+      if (!visible || document.hidden) return;
+      raf = requestAnimationFrame(loop);
+      if (now - last < 33) return; // ~30 fps
+      last = now;
+      if (active) { px += (tx - px) * 0.18; py += (ty - py) * 0.18; }
+      draw(now);
+    };
+    const kick = () => { if (!raf) raf = requestAnimationFrame(loop); };
+
+    resize();
+    document.fonts && document.fonts.ready.then(resize);
+    addEventListener('resize', resize);
+
+    if (!reduce) {
+      new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) kick(); }).observe(hero);
+      document.addEventListener('visibilitychange', kick);
+      if (matchMedia('(pointer: fine)').matches) {
+        hero.addEventListener('pointermove', (e) => {
+          const r = hero.getBoundingClientRect();
+          tx = e.clientX - r.left; ty = e.clientY - r.top;
+          if (!active) { px = tx; py = ty; active = true; }
+        });
+        hero.addEventListener('pointerleave', () => { active = false; });
+      }
+      kick();
+    }
   }
 
   /* ---------- terminal ---------- */
